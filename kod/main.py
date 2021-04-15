@@ -9,8 +9,8 @@ import numpy as np
 fun_name, fun_ptr = print_fun()
 
 # pobierz dane
-a           = int(input("Podaj lewą stronę przedziału: "))
-b           = int(input("Podaj prawą stronę przedziału: "))
+a           = float(input("Podaj lewą stronę przedziału: "))
+b           = float(input("Podaj prawą stronę przedziału: "))
 points_am   = int(input("Podaj ile węzłów wygenerować: "))
 
 # ustaw dobrze początek i koniec przedziału
@@ -28,7 +28,7 @@ for x in pg.gen_equidistant(a, b, points_am):
 points_eq = np.array(points_eq).transpose()
 
 eqinterpol = EQinterpol(points_eq)
-gen_chart(fun_ptr, eqinterpol.getY, points_eq, filename + "_eq.png")
+gen_chart(fun_ptr, eqinterpol.getY, points_eq, a, b, filename + "_eq.png")
 
 ###############################
 # generowanie interpolacji z punktami
@@ -39,11 +39,18 @@ for x in pg.gen_random(a, b, points_am):
 points_rand = np.array(points_rand).transpose()
 
 stinterpol = STinterpol(points_rand)
-gen_chart(fun_ptr, stinterpol.getY, points_rand, filename + "_rand.png")
+gen_chart(fun_ptr, stinterpol.getY, points_rand, a, b, filename + "_rand.png")
 
 print("funkcja:       {}".format(fun_name))
 print("przedział:     {} - {}".format(a, b))
 print("liczba węzłów: {}".format(points_am))
 print()
-print("Współczynniki interpolacji losowej:       {}".format(stinterpol.getCoef()))
-print("Współczynniki interpolacji równoodległej: {}".format(eqinterpol.getCoef()))
+print("interpolacja losowa:")
+print("    współczynniki:   {}".format(stinterpol.getCoef()))
+print("    węzły (x):       {}".format([round(elem, 3) for elem in points_rand[0]]))
+print("    węzły (y):       {}".format([round(elem, 3) for elem in points_rand[1]]))
+print()
+print("interpolacja równoodległa:")
+print("    współczynniki:   {}".format(eqinterpol.getCoef()))
+print("    węzły (x):       {}".format([round(elem, 3) for elem in points_eq[0]]))
+print("    węzły (y):       {}".format([round(elem, 3) for elem in points_eq[1]]))

@@ -1,4 +1,4 @@
-from numpy import sin, cos
+from numpy import sin, cos, tan, exp, arctan
 
 def cot(x):
     return 1/tan(x)
@@ -9,10 +9,10 @@ def csc(x):
 #####
 def f0(x):
     # policzenie schematem hornera
-    # 3*x^5 - 5*x^4 + 1.2*x^3 + 5x^2 + 10x - 1
-    coefficients = [3, -5, 1.2, 5, 10, -1]
+    # 0.3*x³ - 0.1x² - 3.7x + 0.4
+    coefficients = [0.3, -0.1, -3.7, 0.4]
     result = coefficients[0]
-    for i in range(1, 6):
+    for i in range(1, 4):
         result = result*x + coefficients[i]
     return result
 #####
@@ -37,13 +37,13 @@ def f3(x):
 
 #####
 def f4(x):
-    result = sin(2 * x + 5)
+    result = 17 + arctan(0.75*exp(sin(0.555*x)))+tan(7*x)
     return result
 #####
 
 #---#
 def f5(x): 
-    result = abs((x - cos(x)) * (x + cos(x)))
+    result = arctan(cos(abs(sin(x) * sin(x) * tan(x / 2)))) * x*x * sin( 26 + tan(sin(x) / cos(1999)))
     return result
 #---#
 
@@ -58,7 +58,7 @@ def f5(x):
 
 functions = [
     # 0:
-    ["3*x⁵ - 5*x⁴ + 1.2*x³ + 5x² + 10x - 1", f0],
+    ["0.3*x³ - 0.1x² - 3.7x + 0.4", f0],
     # 1:
     ["2x + 5", f1],
     # 2:
@@ -66,9 +66,9 @@ functions = [
     # 3:
     ["sin(x)", f3],
     # 4:
-    ["sin(2x + 5)", f4],
+    ["arctan((7/4)exp(sin(0.555x)) + tan(7x) + 17", f4],
     # 5:
-    ["|x²-cos²(x)|", f5]
+    ["arctan(cos(|sin²(x) * tan(x/2)|))sin(26 + tan(sin(x) /cos(1999)))x²", f5]
 ]
 
 def print_fun():
